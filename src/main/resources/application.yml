@@ -1,24 +1,29 @@
 server:
   port: 8080
 
-## Primary/Target Database Properties
+# Primary/Target Database Properties
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3307/customerdb?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://localhost:3305/customerdb?allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: root
   jpa.hibernate.ddl-auto: create-drop
   jpa.show-sql: true
-
-## Source Database Properties
-customer:
-  datasource:
-    host: localhost
-    port: 3305
-    database: customerdb
-    username: root
-    password: dbz
-
+#spring:
+#  profiles:
+#    active: dev
+#  application:
+#    name: KAFKA-DEBZUIM-CDC
+#  datasource:
+#    platform: postgres
+#    url: jdbc:postgresql://localhost:5432/duyo_db
+#    username: duyodev
+#    password: duyodev2021
+#    hikari:
+#      connection-timeout: 60000
+#      maximum-pool-size: 20
+#  jpa:
+#    database: POSTGRESQL
 ## Logging properties
 logging:
   level:

@@ -1,4 +1,4 @@
-package com.example.demokafkaconnect;
+package com.example.demokafkaconnect.dao;
 
 import com.example.demokafkaconnect.bo.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

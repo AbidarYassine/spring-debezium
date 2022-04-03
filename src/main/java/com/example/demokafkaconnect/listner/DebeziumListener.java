@@ -1,17 +1,18 @@
 package com.example.demokafkaconnect.listner;
 
 
-import com.example.demokafkaconnect.service.CustomerService;
+import com.example.demokafkaconnect.config.SendMessage;
 import io.debezium.config.Configuration;
 import io.debezium.embedded.Connect;
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.RecordChangeEvent;
 import io.debezium.engine.format.ChangeEventFormat;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.kafka.connect.data.Field;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.source.SourceRecord;
-import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -30,17 +31,17 @@ import static java.util.stream.Collectors.toMap;
 public class DebeziumListener {
 
     private final Executor executor = Executors.newSingleThreadExecutor();
-    private final CustomerService customerService;
+        private final SendMessage sendMessage;
+//
+    private final KafkaTemplate<String, String> kafkaTemplate;
     private final DebeziumEngine<RecordChangeEvent<SourceRecord>> debeziumEngine;
 
-    public DebeziumListener(Configuration customerConnectorConfiguration, CustomerService customerService) {
+    public DebeziumListener(Configuration customerConnectorConfiguration, KafkaTemplate<String, String> kafkaTemplate, SendMessage sendMessage) {
 
-        this.debeziumEngine = DebeziumEngine.create(ChangeEventFormat.of(Connect.class))
-                .using(customerConnectorConfiguration.asProperties())
-                .notifying(this::handleChangeEvent)
-                .build();
-
-        this.customerService = customerService;
+        this.debeziumEngine = DebeziumEngine.create(ChangeEventFormat.of(Connect.class)).using(customerConnectorConfiguration.asProperties()).notifying(this::handleChangeEvent).build();
+//
+        this.sendMessage = sendMessage;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     private void handleChangeEvent(RecordChangeEvent<SourceRecord> sourceRecordRecordChangeEvent) {
@@ -63,8 +64,7 @@ public class DebeziumListener {
                         .map(fieldName -> Pair.of(fieldName, struct.get(fieldName)))
                         .collect(toMap(Pair::getKey, Pair::getValue));
 
-                this.customerService.replicateData(payload, operation);
-                log.info("Updated Data: {} with Operation: {}", payload, operation.name());
+                kafkaTemplate.send("source_topic_users", sendMessage.buildMessage(payload));
             }
         }
     }

@@ -1,14 +1,12 @@
 package com.example.demokafkaconnect.service.impl;
 
-import com.example.demokafkaconnect.CustomerRepository;
 import com.example.demokafkaconnect.bo.Customer;
-import com.example.demokafkaconnect.service.CustomerService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.debezium.data.Envelope.Operation;
+import com.example.demokafkaconnect.dao.CustomerRepository;
+import com.example.demokafkaconnect.service.facade.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,15 +14,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
+    @Override
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
+    }
 
-    public void replicateData(Map<String, Object> customerData,Operation operation) {
-        final ObjectMapper mapper = new ObjectMapper();
-        final Customer customer = mapper.convertValue(customerData, Customer.class);
+    @Override
+    public Customer findById(Long id) {
+        return customerRepository.findById(id).orElse(null);
+    }
 
-        if (Operation.DELETE == operation) {
-            customerRepository.deleteById(customer.getId());
-        } else {
-            customerRepository.save(customer);
-        }
+    @Override
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
     }
 }
