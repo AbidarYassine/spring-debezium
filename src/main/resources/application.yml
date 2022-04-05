@@ -1,29 +1,21 @@
 server:
   port: 8080
-
-# Primary/Target Database Properties
 spring:
+  profiles:
+    active: dev
+  application:
+    name: duyo-api
   datasource:
-    url: jdbc:mysql://localhost:3305/customerdb?allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: root
-  jpa.hibernate.ddl-auto: create-drop
-  jpa.show-sql: true
-#spring:
-#  profiles:
-#    active: dev
-#  application:
-#    name: KAFKA-DEBZUIM-CDC
-#  datasource:
-#    platform: postgres
-#    url: jdbc:postgresql://localhost:5432/duyo_db
-#    username: duyodev
-#    password: duyodev2021
-#    hikari:
-#      connection-timeout: 60000
-#      maximum-pool-size: 20
-#  jpa:
-#    database: POSTGRESQL
+    platform: postgres
+    url: jdbc:postgresql://localhost:6875/materialize
+    username: materialize
+    password:
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 20
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
 ## Logging properties
 logging:
   level:
