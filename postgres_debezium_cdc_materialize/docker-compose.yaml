@@ -18,8 +18,8 @@ services:
     image: confluentinc/cp-zookeeper:5.5.3
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
-  mzcli:
-    image: materialize/cli
+#  mzcli:
+#    image: materialize/cli
   kafka:
     image: confluentinc/cp-enterprise-kafka:5.5.3
     depends_on: [ zookeeper ]
