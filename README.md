@@ -14,13 +14,13 @@ Debezium, a platform commonly used for CDC. </br>
 
 (this spring boot application is connected to materialized)
 after following the steps below, you can start the application. and query materialized views with
-spring data jpa
+spring data jpa or we can create a sink (kafka) and consume the data.
 
 1. clone project from github and go to the project folder.
 2. run docker-compose.yml -d up.
-3. Create a database and a table ,and insert some data. you can check create_source.sql file
-4. setup postgresql debezium connector (run config_Debez_postgresql.cmd)  and kafka to materialize
+3. setup postgresql debezium connector (run config_Debez_postgresql.cmd)  and kafka to materialize
    is connected automatically
+4.  take a look at the http://localhost:8081/subjects (topics)
 5. uncomment the mzcli service and run docker-compose run mzcli
 6. create source in materialize ( you can check create_source.sql file )
 7. Create Materialize view

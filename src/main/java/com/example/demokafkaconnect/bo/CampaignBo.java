@@ -18,9 +18,5 @@ public class CampaignBo implements Serializable {
     @Column(name = "STATUT_COURANT")
     @Enumerated(EnumType.ORDINAL)
     private CampaignStatus currentStatus;
-
-    @ManyToOne
-    @JoinColumn(name = "user_bo_id")
-    private UserBo userBo;
-
+    
 }

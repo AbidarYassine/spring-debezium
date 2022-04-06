@@ -25,8 +25,15 @@ public enum CampaignStatus {
 
   public static CampaignStatus get(String name) {
     return Arrays.stream(CampaignStatus.values())
-        .filter(item -> item.name().equalsIgnoreCase(name))
-        .findFirst()
-        .orElse(null);
+            .filter(item -> item.name().equalsIgnoreCase(name))
+            .findFirst()
+            .orElse(null);
+  }
+
+  public static CampaignStatus get(Integer order) {
+    return Arrays.stream(CampaignStatus.values())
+            .filter(item -> item.getOrder() == order)
+            .findFirst()
+            .orElse(null);
   }
 }
