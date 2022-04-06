@@ -1,0 +1,14 @@
+{
+  "name": "duyodb-connector-db",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "plugin.name": "pgoutput",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "duyodev",
+    "database.password": "duyodev",
+    "database.dbname": "duyodb",
+    "database.server.name": "postgres",
+    "table.include.list": "public.campaigns"
+  }
+}
