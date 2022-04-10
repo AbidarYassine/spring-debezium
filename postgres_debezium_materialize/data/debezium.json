@@ -1,5 +1,5 @@
 {
-  "name": "duyodb-connector-db",
+  "name": "duyodb-connector-duyo",
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "plugin.name": "pgoutput",
@@ -9,6 +9,6 @@
     "database.password": "duyodev",
     "database.dbname": "duyodb",
     "database.server.name": "postgres",
-    "table.include.list": "public.campaigns"
+    "table.include.list": "public.campaigns,public.users,public.comments"
   }
 }

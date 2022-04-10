@@ -31,7 +31,7 @@ public class UserServiceImpl implements CampaingService {
             CountCampaingStatus countCampaingStatus = new CountCampaingStatus();
             countCampaingStatus.setCount((BigInteger) el[1]);
             Integer value = (Integer) el[0];
-            countCampaingStatus.setCurrentStatus(CampaignStatus.get(value));
+            countCampaingStatus.setCurrentStatus(CampaignStatus.get((value)));
             countCampaingStatuses.add(countCampaingStatus);
             System.out.println(el[0] + " " + el[1]);
         });

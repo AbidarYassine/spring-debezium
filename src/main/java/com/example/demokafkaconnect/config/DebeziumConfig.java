@@ -16,8 +16,8 @@ public class DebeziumConfig {
     private String customerDbPassword;
 
 //    @Bean
-//    public io.debezium.config.Configuration customerConnector() {
-//        return io.debezium.config.Configuration.create()
+//    public io.debezium.data.Configuration customerConnector() {
+//        return io.debezium.data.Configuration.create()
 //                .with("name", UUID.randomUUID().toString())
 //                .with("connector.class", "io.debezium.connector.mysql.MySqlConnector")
 //                .with("offset.storage", "org.apache.kafka.connect.storage.FileOffsetBackingStore")

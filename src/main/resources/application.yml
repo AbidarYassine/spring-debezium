@@ -7,7 +7,7 @@ spring:
     name: duyo-api
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:6875/materialize
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:6875/materialize}
     username: materialize
     password:
     hikari:
@@ -16,6 +16,30 @@ spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:127.0.0.1:9092}
+    #    properties:
+    #      sasl:
+    #        jaas:
+    #          data: org.apache.kafka.common.security.plain.PlainLoginModule required username=${kafka_username:'admin'} password=${kafka_password:'admin-secret'};
+    #        mechanism: PLAIN
+    #      security:
+    #        protocol: SASL_PLAINTEXT
+    consumer:
+      auto-offset-reset: earliest
+      group-id: ${SPRING_KAFKA_CONSUMER_GROUP_ID:group-1}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 1
+      fetch-max-wait: 36000
+      enable-auto-commit: false
+      client-id: example
+    jaas:
+      enabled: true
+    listener:
+      poll-timeout: 1800000
+      concurrency: 1
+      ack-mode: manual_immediate
 ## Logging properties
 logging:
   level:
