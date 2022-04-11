@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CampaingService {
     List<CampaignBo> findAll();
+
     List<CountCampaingStatus> countCampaignByStatus();
 
 }

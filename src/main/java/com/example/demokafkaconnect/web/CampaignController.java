@@ -27,7 +27,7 @@ public class CampaignController {
         return campaingService.findAll();
     }
 
-    @GetMapping("/count")
+    @GetMapping("/count-status")
     @CrossOrigin(value = "*", allowedHeaders = "*")
     public List<CountCampaingStatus> getCountCampaingStatus() {
         return campaingService.countCampaignByStatus();

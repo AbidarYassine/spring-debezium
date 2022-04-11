@@ -31,6 +31,9 @@ SELECT *  FROM campaigns;
 CREATE MATERIALIZED VIEW campaings_view_status AS
 SELECT statut_courant, COUNT(*) FROM campaigns GROUP BY statut_courant;
 
+
+CREATE MATERIALIZED VIEW campaings_count AS SELECT  COUNT(*) FROM campaigns ;
+
 CREATE MATERIALIZED VIEW campaings_comments_view AS
 SELECT campaigns.id as campaingId,comments.id as commentId,statut_courant,contenu
 FROM campaigns,comments WHERE campaigns.id = comments.campaign_bo_id;

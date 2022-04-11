@@ -30,9 +30,9 @@ services:
       - debezium
   mzcli:
     image: materialize/cli
-    volumes:
-      - ./script:/mounted
-    entrypoint: /mounted/setup.sh
+#    volumes:
+#      - ./script:/mounted
+#    entrypoint: /mounted/setup.sh
 
   materialized:
     image: materialize/materialized:v0.15.0
